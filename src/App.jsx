@@ -16,20 +16,22 @@ function App() {
     e.preventDefault();
     const form = e.target;
 
-    fetch(form.action, {
-      method: form.method,
+    fetch("https://formspree.io/f/xblkreqz", {
+      method: "POST",
       body: new FormData(form),
       headers: {
         Accept: "application/json",
       },
-    }).then((response) => {
-      if (response.ok) {
-        setSubmitted(true);
-        form.reset();
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    });
+    })
+      .then((response) => {
+        if (response.ok) {
+          setSubmitted(true);
+          form.reset();
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      })
+      .catch(() => alert("Error submitting form."));
   };
 
   return (
@@ -83,15 +85,7 @@ function App() {
                 ✅ Thank you! Your booking has been confirmed.
               </div>
             ) : (
-              <form
-                action="https://formspree.io/f/xblkreqz"
-                method="POST"
-                onSubmit={handleSubmit}
-                className="space-y-4"
-                noValidate
-              >
-                <input type="hidden" name="_redirect" value="false" />
-
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                 <div>
                   <label className="block text-sm mb-1">Name</label>
                   <input
@@ -112,20 +106,6 @@ function App() {
                     title="Enter a valid phone number"
                     className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
                   />
-                </div>
-
-                <div>
-                  <label className="block text-sm mb-1">What do you want to book?</label>
-                  <select
-                    name="item"
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  >
-                    <option value="">-- Select --</option>
-                    <option value="PC">Gaming PC</option>
-                    <option value="PS5">PlayStation 5</option>
-                    <option value="Steering Wheel">Steering Wheel Setup</option>
-                  </select>
                 </div>
 
                 <div>
@@ -150,17 +130,31 @@ function App() {
                 </div>
 
                 <div>
+                  <label className="block text-sm mb-1">What do you want to book?</label>
+                  <select
+                    name="item"
+                    required
+                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                  >
+                    <option value="">-- Select --</option>
+                    <option value="PC">PC</option>
+                    <option value="PS5">PS5</option>
+                    <option value="Steering Wheel">Steering Wheel</option>
+                  </select>
+                </div>
+
+                <div>
                   <label className="block text-sm mb-1">Duration</label>
                   <select
                     name="duration"
                     required
                     className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
                   >
-                    <option value="">-- Select Duration --</option>
+                    <option value="">-- Select --</option>
                     <option value="1 hour">1 Hour</option>
                     <option value="2 hours">2 Hours</option>
                     <option value="3 hours">3 Hours</option>
-                    <option value="4 hours">4 Hours</option>
+                    <option value="More than 3 hours">More than 3 Hours</option>
                   </select>
                 </div>
 
