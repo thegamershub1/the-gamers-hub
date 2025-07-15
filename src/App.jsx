@@ -81,7 +81,7 @@ function App() {
             we’ve got the perfect setup with high-end consoles, blazing-fast internet, and the best gaming ambiance in town.
           </p>
           <p className="mt-4 text-gray-400 text-sm">
-            🎮 PS5 | 🖥️ Gaming PCs | 🕹️ Tournaments | 💺 Comfortable seating | ⚡ bevrages
+            🎮 PS5 | 🖥️ Gaming PCs | 🕹️ Tournaments | 💺 Comfortable seating | ⚡ Snack Bar & More!
           </p>
         </div>
       </section>
@@ -94,9 +94,11 @@ function App() {
           </h3>
           <p className="text-gray-400 mb-8">Check out our gaming setup and past events.</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="h-40 bg-gray-800 rounded-lg animate-pulse" />
-            <div className="h-40 bg-gray-800 rounded-lg animate-pulse" />
-            <div className="h-40 bg-gray-800 rounded-lg animate-pulse" />
+            <img src="/media1.png" alt="Media 1" className="rounded-lg shadow-md" />
+            <img src="/media2.png" alt="Media 2" className="rounded-lg shadow-md" />
+            <img src="/media3.png" alt="Media 3" className="rounded-lg shadow-md" />
+            <img src="/media4.png" alt="Media 4" className="rounded-lg shadow-md" />
+            <img src="/media5.png" alt="Media 5" className="rounded-lg shadow-md" />
           </div>
         </div>
       </section>
@@ -107,9 +109,9 @@ function App() {
           <h3 className="text-3xl md:text-4xl font-orbitron text-cyan-400 mb-6 drop-shadow-[0_0_6px_#06b6d4]">
             Contact Us
           </h3>
-          <p className="text-gray-300">📞 Call us: <span className="text-cyan-400">+91 8434610086 , 06214058918</span></p>
+          <p className="text-gray-300">📞 Call us: <span className="text-cyan-400">+91 98765 43210</span></p>
           <p className="text-gray-300 mt-2">📧 Email: <span className="text-cyan-400">mrzayed45@gmail.com</span></p>
-          <p className="text-gray-300 mt-2">📍 Location: <span className="text-cyan-400">BALIGADH GARDEN, OPP. MDDM COLLEGE, MITHANPURA ROAD MUZAFFARPUR</span></p>
+          <p className="text-gray-300 mt-2">📍 Location: <span className="text-cyan-400">Your Gaming Lounge Address</span></p>
         </div>
       </section>
 
