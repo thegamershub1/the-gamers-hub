@@ -112,6 +112,28 @@ function App() {
           <p className="text-gray-300">📞 Call us: <span className="text-cyan-400">+91 98765 43210</span></p>
           <p className="text-gray-300 mt-2">📧 Email: <span className="text-cyan-400">mrzayed45@gmail.com</span></p>
           <p className="text-gray-300 mt-2">📍 Location: <span className="text-cyan-400">Your Gaming Lounge Address</span></p>
+          <p className="text-gray-300 mt-2">
+            📸 Instagram:{" "}
+            <a
+              href="https://www.instagram.com/the.gamers.hub_/?__pwa=1#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 underline"
+            >
+              Follow us on Instagram
+            </a>
+          </p>
+          <p className="text-gray-300 mt-2">
+            🗺️ Google Maps:{" "}
+            <a
+              href="https://g.co/kgs/MuEjDQM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 underline"
+            >
+              View on Map
+            </a>
+          </p>
         </div>
       </section>
 
