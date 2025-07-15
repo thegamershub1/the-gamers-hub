@@ -12,10 +12,6 @@ function App() {
     }, 100);
   };
 
-  const handleSubmit = () => {
-    setTimeout(() => setSubmitted(true), 1000);
-  };
-
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       {/* Hero Section */}
@@ -41,8 +37,8 @@ function App() {
             About Us
           </h3>
           <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-            Welcome to <span className="text-cyan-400 font-semibold">THE GAMER'S HUB</span> — your ultimate gaming destination. 
-            Whether you're into casual FIFA sessions or intense Call of Duty marathons, 
+            Welcome to <span className="text-cyan-400 font-semibold">THE GAMER'S HUB</span> — your ultimate gaming destination.
+            Whether you're into casual FIFA sessions or intense Call of Duty marathons,
             we’ve got the perfect setup with high-end consoles, blazing-fast internet, and the best gaming ambiance in town.
           </p>
           <p className="mt-4 text-gray-400 text-sm">
@@ -70,7 +66,25 @@ function App() {
               <form
                 action="https://formspree.io/f/xblkreqz"
                 method="POST"
-                onSubmit={handleSubmit}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const form = e.target;
+
+                  fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: {
+                      Accept: "application/json",
+                    },
+                  }).then((response) => {
+                    if (response.ok) {
+                      setSubmitted(true);
+                      form.reset();
+                    } else {
+                      alert("Something went wrong. Please try again.");
+                    }
+                  });
+                }}
                 className="space-y-4"
               >
                 <div>
@@ -96,7 +110,7 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1">Booking Item</label>
+                  <label className="block text-sm mb-1">What do you want to book?</label>
                   <select
                     name="item"
                     required
@@ -121,7 +135,7 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1">Select Start Time</label>
+                  <label className="block text-sm mb-1">Start Time</label>
                   <input
                     type="time"
                     name="startTime"
@@ -131,17 +145,18 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1">Duration</label>
+                  <label className="block text-sm mb-1">Booking Duration</label>
                   <select
                     name="duration"
                     required
                     className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
                   >
                     <option value="">-- Select Duration --</option>
-                    <option value="1 hour">1 Hour</option>
-                    <option value="2 hours">2 Hours</option>
-                    <option value="3 hours">3 Hours</option>
-                    <option value="4 hours">4 Hours</option>
+                    <option value="1 hour">1 hour</option>
+                    <option value="2 hours">2 hours</option>
+                    <option value="3 hours">3 hours</option>
+                    <option value="4 hours">4 hours</option>
+                    <option value="5+ hours">5+ hours</option>
                   </select>
                 </div>
 
