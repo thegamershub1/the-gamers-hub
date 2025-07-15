@@ -38,21 +38,23 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
-      {/* Header with logo */}
-      <header className="w-full flex justify-between items-center px-6 py-4 absolute top-0 left-0 z-50">
-        <div></div>
-        <div>
-          <img
-            src="/logo.png"
-            alt="THE GAMER'S HUB Logo"
-            className="h-16 md:h-20 object-contain"
-          />
-        </div>
+    <div className="min-h-screen bg-black text-white font-sans scroll-smooth">
+      {/* Navbar */}
+      <header className="flex justify-between items-center p-4 bg-gray-950 shadow-md sticky top-0 z-50">
+        <h1 className="text-2xl md:text-3xl font-orbitron text-cyan-400 drop-shadow-[0_0_8px_#06b6d4]">
+          THE GAMER'S HUB
+        </h1>
+        <nav className="space-x-4 hidden md:flex">
+          <a href="#about" className="hover:text-cyan-400 transition">About</a>
+          <a href="#media" className="hover:text-cyan-400 transition">Media</a>
+          <a href="#contact" className="hover:text-cyan-400 transition">Contact</a>
+          <a href="#booking" className="hover:text-cyan-400 transition">Book</a>
+        </nav>
+        <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
       </header>
 
       {/* Hero Section */}
-      <main className="flex flex-col items-center justify-center text-center px-4 py-32">
+      <main className="flex flex-col items-center justify-center text-center px-4 py-20">
         <h1 className="text-5xl md:text-7xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_#06b6d4] mb-4">
           THE GAMER'S HUB
         </h1>
@@ -68,7 +70,7 @@ function App() {
       </main>
 
       {/* About Section */}
-      <section className="bg-gray-900 py-16 px-6 border-t border-gray-800">
+      <section id="about" className="bg-gray-900 py-16 px-6 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl md:text-4xl font-orbitron text-cyan-400 mb-6 drop-shadow-[0_0_6px_#06b6d4]">
             About Us
@@ -79,16 +81,44 @@ function App() {
             we’ve got the perfect setup with high-end consoles, blazing-fast internet, and the best gaming ambiance in town.
           </p>
           <p className="mt-4 text-gray-400 text-sm">
-            🎮 PS5 | 🖥️ Gaming PCs | 🕹️ Tournaments | 💺 Comfortable seating | ⚡ Snack Bar & More!
+            🎮 PS5 | 🖥️ Gaming PCs | 🕹️ Tournaments | 💺 Comfortable seating | ⚡ bevrages
           </p>
+        </div>
+      </section>
+
+      {/* Media Section */}
+      <section id="media" className="bg-black py-16 px-6 border-t border-gray-800">
+        <div className="max-w-5xl mx-auto text-center">
+          <h3 className="text-3xl md:text-4xl font-orbitron text-cyan-400 mb-6 drop-shadow-[0_0_6px_#06b6d4]">
+            Media
+          </h3>
+          <p className="text-gray-400 mb-8">Check out our gaming setup and past events.</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="h-40 bg-gray-800 rounded-lg animate-pulse" />
+            <div className="h-40 bg-gray-800 rounded-lg animate-pulse" />
+            <div className="h-40 bg-gray-800 rounded-lg animate-pulse" />
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="bg-gray-950 py-16 px-6 border-t border-gray-800">
+        <div className="max-w-3xl mx-auto text-center">
+          <h3 className="text-3xl md:text-4xl font-orbitron text-cyan-400 mb-6 drop-shadow-[0_0_6px_#06b6d4]">
+            Contact Us
+          </h3>
+          <p className="text-gray-300">📞 Call us: <span className="text-cyan-400">+91 8434610086 , 06214058918</span></p>
+          <p className="text-gray-300 mt-2">📧 Email: <span className="text-cyan-400">mrzayed45@gmail.com</span></p>
+          <p className="text-gray-300 mt-2">📍 Location: <span className="text-cyan-400">BALIGADH GARDEN, OPP. MDDM COLLEGE, MITHANPURA ROAD MUZAFFARPUR</span></p>
         </div>
       </section>
 
       {/* Booking Form */}
       {showForm && (
         <section
+          id="booking"
           ref={formRef}
-          className="bg-gray-950 py-16 px-6 border-t border-gray-800"
+          className="bg-black py-16 px-6 border-t border-gray-800"
         >
           <div className="max-w-md mx-auto">
             <h3 className="text-2xl font-orbitron text-cyan-400 mb-4 text-center">
