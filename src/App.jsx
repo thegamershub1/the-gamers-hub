@@ -3,13 +3,13 @@ import { useState, useRef } from "react";
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const formRef = useRef(null); // ref to the booking form section
+  const formRef = useRef(null);
 
   const handleBookNow = () => {
     setShowForm(true);
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100); // slight delay ensures section renders
+    }, 100);
   };
 
   const handleSubmit = () => {
@@ -74,6 +74,20 @@ function App() {
                 className="space-y-4"
               >
                 <div>
+                  <label className="block text-sm mb-1">What would you like to book?</label>
+                  <select
+                    name="bookingItem"
+                    required
+                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                  >
+                    <option value="">-- Select an item --</option>
+                    <option value="PC">PC</option>
+                    <option value="PS5">PS5</option>
+                    <option value="Steering Wheel">Steering Wheel</option>
+                  </select>
+                </div>
+
+                <div>
                   <label className="block text-sm mb-1">Name</label>
                   <input
                     type="text"
@@ -120,6 +134,21 @@ function App() {
                     <option value="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</option>
                     <option value="6:00 PM - 8:00 PM">6:00 PM - 8:00 PM</option>
                     <option value="8:00 PM - 10:00 PM">8:00 PM - 10:00 PM</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm mb-1">Duration</label>
+                  <select
+                    name="duration"
+                    required
+                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                  >
+                    <option value="">-- Select Duration --</option>
+                    <option value="1 Hour">1 Hour</option>
+                    <option value="2 Hours">2 Hours</option>
+                    <option value="3 Hours">3 Hours</option>
+                    <option value="4 Hours">4 Hours</option>
                   </select>
                 </div>
 
