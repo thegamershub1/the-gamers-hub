@@ -94,11 +94,11 @@ function App() {
           </h3>
           <p className="text-gray-400 mb-8">Check out our gaming setup and past events.</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <img src="/media1.png" alt="Media 1" className="rounded-lg shadow-md" />
-            <img src="/media2.png" alt="Media 2" className="rounded-lg shadow-md" />
-            <img src="/media3.png" alt="Media 3" className="rounded-lg shadow-md" />
-            <img src="/media4.png" alt="Media 4" className="rounded-lg shadow-md" />
-            <img src="/media5.png" alt="Media 5" className="rounded-lg shadow-md" />
+            <img src="/media1.png" alt="Media 1" className="rounded-lg w-full h-40 object-cover" />
+            <img src="/media2.png" alt="Media 2" className="rounded-lg w-full h-40 object-cover" />
+            <img src="/media3.png" alt="Media 3" className="rounded-lg w-full h-40 object-cover" />
+            <img src="/media4.png" alt="Media 4" className="rounded-lg w-full h-40 object-cover" />
+            <img src="/media5.png" alt="Media 5" className="rounded-lg w-full h-40 object-cover" />
           </div>
         </div>
       </section>
