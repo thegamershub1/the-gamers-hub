@@ -40,7 +40,10 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       <main className="flex flex-col items-center justify-center text-center px-4 py-20">
-        <h2 className="text-5xl md:text-6xl font-orbitron text-cyan-400 drop-shadow-[0_0_12px_#06b6d4]">
+        <h1 className="text-5xl md:text-6xl font-orbitron text-cyan-400 drop-shadow-[0_0_16px_#06b6d4] mb-4">
+          🎮 THE GAMER'S HUB 🎮
+        </h1>
+        <h2 className="text-3xl md:text-4xl text-white font-semibold drop-shadow-[0_0_8px_#0ff]">
           Level Up Your Play
         </h2>
         <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-xl">
@@ -83,7 +86,7 @@ function App() {
             {submitted ? (
               <div className="text-center text-green-400 text-xl mt-10">
                 ✅ Thank you! We've received your booking request.<br />
-                We'll contact you shortly to confirm your slot.
+                We’ll contact you shortly to confirm your slot.
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
