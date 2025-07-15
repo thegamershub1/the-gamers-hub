@@ -74,20 +74,6 @@ function App() {
                 className="space-y-4"
               >
                 <div>
-                  <label className="block text-sm mb-1">What would you like to book?</label>
-                  <select
-                    name="bookingItem"
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  >
-                    <option value="">-- Select an item --</option>
-                    <option value="PC">PC</option>
-                    <option value="PS5">PS5</option>
-                    <option value="Steering Wheel">Steering Wheel</option>
-                  </select>
-                </div>
-
-                <div>
                   <label className="block text-sm mb-1">Name</label>
                   <input
                     type="text"
@@ -110,6 +96,20 @@ function App() {
                 </div>
 
                 <div>
+                  <label className="block text-sm mb-1">Booking Item</label>
+                  <select
+                    name="item"
+                    required
+                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                  >
+                    <option value="">-- Select --</option>
+                    <option value="PC">PC</option>
+                    <option value="PS5">PS5</option>
+                    <option value="Steering Wheel">Steering Wheel</option>
+                  </select>
+                </div>
+
+                <div>
                   <label className="block text-sm mb-1">Select Date</label>
                   <input
                     type="date"
@@ -121,20 +121,13 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-sm mb-1">Select Time Slot</label>
-                  <select
-                    name="slot"
+                  <label className="block text-sm mb-1">Select Start Time</label>
+                  <input
+                    type="time"
+                    name="startTime"
                     required
                     className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  >
-                    <option value="">-- Select Slot --</option>
-                    <option value="10:00 AM - 12:00 PM">
-                    <option value="12:00 PM - 2:00 PM">
-                    <option value="2:00 PM - 4:00 PM">
-                    <option value="4:00 PM - 6:00 PM">
-                    <option value="6:00 PM - 8:00 PM">
-                    <option value="8:00 PM - 10:00 PM">
-                  </select>
+                  />
                 </div>
 
                 <div>
@@ -145,10 +138,10 @@ function App() {
                     className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
                   >
                     <option value="">-- Select Duration --</option>
-                    <option value="1 Hour">1 Hour</option>
-                    <option value="2 Hours">2 Hours</option>
-                    <option value="3 Hours">3 Hours</option>
-                    <option value="4 Hours">4 Hours</option>
+                    <option value="1 hour">1 Hour</option>
+                    <option value="2 hours">2 Hours</option>
+                    <option value="3 hours">3 Hours</option>
+                    <option value="4 hours">4 Hours</option>
                   </select>
                 </div>
 
