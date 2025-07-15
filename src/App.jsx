@@ -39,15 +39,25 @@ function App() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-      <main className="flex flex-col items-center justify-center text-center px-4 py-20">
-        <h1 className="text-5xl md:text-6xl font-orbitron text-cyan-400 drop-shadow-[0_0_16px_#06b6d4] mb-4">
-          🎮 THE GAMER'S HUB 🎮
+      {/* Header with logo */}
+      <header className="w-full flex justify-between items-center px-6 py-4 absolute top-0 left-0 z-50">
+        <div></div>
+        <div>
+          <img
+            src="/logo.png"
+            alt="THE GAMER'S HUB Logo"
+            className="h-16 md:h-20 object-contain"
+          />
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <main className="flex flex-col items-center justify-center text-center px-4 py-32">
+        <h1 className="text-5xl md:text-7xl font-orbitron text-cyan-400 drop-shadow-[0_0_20px_#06b6d4] mb-4">
+          THE GAMER'S HUB
         </h1>
-        <h2 className="text-3xl md:text-4xl text-white font-semibold drop-shadow-[0_0_8px_#0ff]">
-          Level Up Your Play
-        </h2>
-        <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-xl">
-          Book your gaming slot now and dominate the arena at THE GAMER'S HUB.
+        <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl">
+          Book your gaming slot now and dominate the arena.
         </p>
         <button
           onClick={handleBookNow}
@@ -57,6 +67,7 @@ function App() {
         </button>
       </main>
 
+      {/* About Section */}
       <section className="bg-gray-900 py-16 px-6 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl md:text-4xl font-orbitron text-cyan-400 mb-6 drop-shadow-[0_0_6px_#06b6d4]">
@@ -73,6 +84,7 @@ function App() {
         </div>
       </section>
 
+      {/* Booking Form */}
       {showForm && (
         <section
           ref={formRef}
@@ -86,7 +98,7 @@ function App() {
             {submitted ? (
               <div className="text-center text-green-400 text-xl mt-10">
                 ✅ Thank you! We've received your booking request.<br />
-                We’ll contact you shortly to confirm your slot.
+                We'll contact you shortly to confirm your slot.
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
