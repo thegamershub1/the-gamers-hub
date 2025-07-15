@@ -82,7 +82,8 @@ function App() {
 
             {submitted ? (
               <div className="text-center text-green-400 text-xl mt-10">
-                ✅ Thank you! Your booking has been confirmed.
+                ✅ Thank you! We've received your booking request.<br />
+                We'll contact you shortly to confirm your slot.
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
