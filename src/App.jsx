@@ -128,12 +128,12 @@ function App() {
                     className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
                   >
                     <option value="">-- Select Slot --</option>
-                    <option value="10:00 AM - 12:00 PM">10:00 AM - 12:00 PM</option>
-                    <option value="12:00 PM - 2:00 PM">12:00 PM - 2:00 PM</option>
-                    <option value="2:00 PM - 4:00 PM">2:00 PM - 4:00 PM</option>
-                    <option value="4:00 PM - 6:00 PM">4:00 PM - 6:00 PM</option>
-                    <option value="6:00 PM - 8:00 PM">6:00 PM - 8:00 PM</option>
-                    <option value="8:00 PM - 10:00 PM">8:00 PM - 10:00 PM</option>
+                    <option value="10:00 AM - 12:00 PM">
+                    <option value="12:00 PM - 2:00 PM">
+                    <option value="2:00 PM - 4:00 PM">
+                    <option value="4:00 PM - 6:00 PM">
+                    <option value="6:00 PM - 8:00 PM">
+                    <option value="8:00 PM - 10:00 PM">
                   </select>
                 </div>
 
