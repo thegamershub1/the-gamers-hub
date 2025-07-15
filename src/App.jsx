@@ -12,31 +12,33 @@ function App() {
     }, 100);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
+    const data = new FormData(form);
 
-    fetch("https://formspree.io/f/xblkreqz", {
-      method: "POST",
-      body: new FormData(form),
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          setSubmitted(true);
-          form.reset();
-        } else {
-          alert("Something went wrong. Please try again.");
-        }
-      })
-      .catch(() => alert("Error submitting form."));
+    try {
+      const response = await fetch("https://formspree.io/f/xblkreqz", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Try again later.");
+    }
   };
 
   return (
     <div className="min-h-screen bg-black text-white font-sans">
-      {/* Hero Section */}
       <main className="flex flex-col items-center justify-center text-center px-4 py-20">
         <h2 className="text-5xl md:text-6xl font-orbitron text-cyan-400 drop-shadow-[0_0_12px_#06b6d4]">
           Level Up Your Play
@@ -52,7 +54,6 @@ function App() {
         </button>
       </main>
 
-      {/* About Section */}
       <section className="bg-gray-900 py-16 px-6 border-t border-gray-800">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="text-3xl md:text-4xl font-orbitron text-cyan-400 mb-6 drop-shadow-[0_0_6px_#06b6d4]">
@@ -69,7 +70,6 @@ function App() {
         </div>
       </section>
 
-      {/* Booking Form Section */}
       {showForm && (
         <section
           ref={formRef}
