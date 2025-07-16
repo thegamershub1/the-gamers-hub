@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "./firebase";
 
+window.RecaptchaVerifier = RecaptchaVerifier;
+
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -320,5 +322,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
