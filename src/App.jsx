@@ -1,8 +1,15 @@
 import { useState, useRef } from "react";
+import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "./firebase";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [phoneVerified, setPhoneVerified] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState(null);
+  const [otp, setOtp] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const formRef = useRef(null);
 
   const handleBookNow = () => {
@@ -10,6 +17,40 @@ function App() {
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
+  };
+
+  const handleSendOtp = async () => {
+    if (!/^\d{10}$/.test(phoneNumber)) {
+      alert("Please enter a valid 10-digit phone number");
+      return;
+    }
+
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+      size: "invisible",
+      callback: () => {},
+    });
+
+    const appVerifier = window.recaptchaVerifier;
+    try {
+      const result = await signInWithPhoneNumber(auth, `+91${phoneNumber}`, appVerifier);
+      setConfirmationResult(result);
+      setOtpSent(true);
+      alert("OTP sent! Check your phone.");
+    } catch (error) {
+      console.error("OTP Error:", error);
+      alert("Failed to send OTP. Try again.");
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    try {
+      await confirmationResult.confirm(otp);
+      setPhoneVerified(true);
+      alert("Phone number verified!");
+    } catch (error) {
+      console.error("OTP Verification Error:", error);
+      alert("Incorrect OTP. Please try again.");
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -155,86 +196,123 @@ function App() {
                 We'll contact you shortly to confirm your slot.
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                <div>
-                  <label className="block text-sm mb-1">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  />
-                </div>
+              <>
+                {!phoneVerified && (
+                  <div className="space-y-4 mb-6">
+                    <div>
+                      <label className="block text-sm mb-1">Phone Number</label>
+                      <input
+                        type="tel"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="Enter 10-digit number"
+                        className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-sm mb-1">Phone Number</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    pattern="[0-9]{10,}"
-                    title="Enter a valid phone number"
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  />
-                </div>
+                    {!otpSent ? (
+                      <button
+                        onClick={handleSendOtp}
+                        className="w-full py-2 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-xl shadow-md transition"
+                      >
+                        Send OTP
+                      </button>
+                    ) : (
+                      <>
+                        <div>
+                          <label className="block text-sm mb-1">Enter OTP</label>
+                          <input
+                            type="text"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                            className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                          />
+                        </div>
+                        <button
+                          onClick={handleVerifyOtp}
+                          className="w-full py-2 bg-green-500 hover:bg-green-400 text-black font-semibold rounded-xl shadow-md transition"
+                        >
+                          Verify OTP
+                        </button>
+                      </>
+                    )}
+                    <div id="recaptcha-container" />
+                  </div>
+                )}
 
-                <div>
-                  <label className="block text-sm mb-1">Select Date</label>
-                  <input
-                    type="date"
-                    name="date"
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  />
-                </div>
+                {phoneVerified && (
+                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                    <div>
+                      <label className="block text-sm mb-1">Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-sm mb-1">Start Time</label>
-                  <input
-                    type="time"
-                    name="startTime"
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  />
-                </div>
+                    <input type="hidden" name="phone" value={phoneNumber} />
 
-                <div>
-                  <label className="block text-sm mb-1">What do you want to book?</label>
-                  <select
-                    name="item"
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  >
-                    <option value="">-- Select --</option>
-                    <option value="PC">PC</option>
-                    <option value="PS5">PS5</option>
-                    <option value="Steering Wheel">Steering Wheel</option>
-                  </select>
-                </div>
+                    <div>
+                      <label className="block text-sm mb-1">Select Date</label>
+                      <input
+                        type="date"
+                        name="date"
+                        required
+                        min={new Date().toISOString().split("T")[0]}
+                        className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-sm mb-1">Duration</label>
-                  <select
-                    name="duration"
-                    required
-                    className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
-                  >
-                    <option value="">-- Select --</option>
-                    <option value="1 hour">1 Hour</option>
-                    <option value="2 hours">2 Hours</option>
-                    <option value="3 hours">3 Hours</option>
-                    <option value="More than 3 hours">More than 3 Hours</option>
-                  </select>
-                </div>
+                    <div>
+                      <label className="block text-sm mb-1">Start Time</label>
+                      <input
+                        type="time"
+                        name="startTime"
+                        required
+                        className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                      />
+                    </div>
 
-                <button
-                  type="submit"
-                  className="w-full mt-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-xl shadow-md transition duration-300"
-                >
-                  Confirm Booking
-                </button>
-              </form>
+                    <div>
+                      <label className="block text-sm mb-1">What do you want to book?</label>
+                      <select
+                        name="item"
+                        required
+                        className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                      >
+                        <option value="">-- Select --</option>
+                        <option value="PC">PC</option>
+                        <option value="PS5">PS5</option>
+                        <option value="Steering Wheel">Steering Wheel</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm mb-1">Duration</label>
+                      <select
+                        name="duration"
+                        required
+                        className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700"
+                      >
+                        <option value="">-- Select --</option>
+                        <option value="1 hour">1 Hour</option>
+                        <option value="2 hours">2 Hours</option>
+                        <option value="3 hours">3 Hours</option>
+                        <option value="More than 3 hours">More than 3 Hours</option>
+                      </select>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full mt-4 py-2 bg-cyan-500 hover:bg-cyan-400 text-black font-semibold rounded-xl shadow-md transition duration-300"
+                    >
+                      Confirm Booking
+                    </button>
+                  </form>
+                )}
+              </>
             )}
           </div>
         </section>
